@@ -2,7 +2,7 @@ import random
 import string
 
 def generate_password(length, mode):
-    # Define character pools based on mode
+    
     letters = string.ascii_letters
     numbers = string.digits
     symbols = string.punctuation
@@ -10,7 +10,7 @@ def generate_password(length, mode):
     pool = ""
     guaranteed = []
 
-    # Mode selection
+    
     if mode == 1:
         pool = letters
         guaranteed.append(random.choice(string.ascii_uppercase))
@@ -26,13 +26,13 @@ def generate_password(length, mode):
         guaranteed.append(random.choice(numbers))
         guaranteed.append(random.choice(symbols))
 
-    # Fill the rest of the password
+    
     password = guaranteed.copy()
 
     for _ in range(length - len(guaranteed)):
         password.append(random.choice(pool))
 
-    # Shuffle so it's not predictable (important!)
+    
     random.shuffle(password)
 
     return "".join(password)
