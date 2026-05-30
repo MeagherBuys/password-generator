@@ -18,7 +18,7 @@ def generate_password(length, mode):
         guaranteed.append(random.choice(string.ascii_uppercase))
         guaranteed.append(random.choice(numbers))
 
-    else:
+    elif mode == 3:
         pool = letters + numbers + symbols
         guaranteed.append(random.choice(string.ascii_uppercase))
         guaranteed.append(random.choice(numbers))
@@ -41,22 +41,38 @@ while True:
     choice = input("Choose an option: ")
 
     if choice == "1":
+
         print("\nPassword Strength Options")
         print("1. Letters only")
         print("2. Letters + Numbers")
         print("3. Letters + Numbers + Symbols")
-        mode = int(input("Choose password strength (1-3): "))
-        length = int(input("Password length: "))
 
-        if length <= 3:
-            print("Password too short for secure generation.")
-        else:
-            password = generate_password(length, mode)
-            print("Generated Password:", password)
+        mode = input("Choose mode (1-3): ")
+
+        if mode not in ["1", "2", "3"]:
+            print("Invalid mode selected.")
+            continue
+
+     
+        while True:
+            try:
+                length = int(input("Password length: "))
+
+                if length < 3:
+                    print("Length too short. Must be at least 3.")
+                    continue
+
+                break
+
+            except ValueError:
+                print("Please enter a valid number.")
+
+        password = generate_password(length, int(mode))
+        print("Generated Password:", password)
 
     elif choice == "2":
         print("Goodbye! Exiting Password Generator...")
         break
 
     else:
-        print("Invalid option. Try again.")
+        print("Invalid menu option. Try again.")
